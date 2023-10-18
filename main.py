@@ -40,7 +40,7 @@ def roll(dices: dict):
 
 
 # print(roll(dices))
-
+#TODO： 记录轮次
 chosen_dices = []
 
 discard_dices = []
@@ -86,11 +86,12 @@ def key_to_style(key:DiceColor):
         case DiceColor.Blue:
             style = 'dodger_blue3'
         case DiceColor.Purple:
-            style = 'purple4'
+            style = 'medium_purple3'
         case DiceColor.Yellow:
             style = 'yellow3'
     return style
 
+#TODO： 计算蓝色加白色数值，紫色填入，黄色剩余等逻辑部分
 def print_dices(dices: dict, title: str):
     table = Table(title=title)
     table.add_column("Index", justify="center", style="cyan", no_wrap=True)
@@ -125,7 +126,7 @@ def choose_dice(dices: dict, round: int):
         chosen, discard, dices = next_round(dices, chosen_color)
     return chosen, discard, dices
 
-
+#TODO： Solo部分提示
 def solo_choose(dices):
     dices = roll(dices=reset_dices(dices=dices))
     res = sorted(dices.items(), key=lambda d: d[1], reverse=False)
