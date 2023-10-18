@@ -2,7 +2,7 @@ from enum import Enum
 from rich.console import Console
 from rich.table import Table
 from rich.text import Text
-from rich.prompt import Prompt
+from rich.prompt import IntPrompt,Prompt
 console = Console()
 
 
@@ -107,17 +107,21 @@ def choose_dice(dices: dict, round: int):
     reroll = 0
 
     print_dices(dices, f'Try {round}')
-
-    input_number = int(input("choose: "))
-    while (input_number == 9):
+    
+    choices = [str(i.value) for i in dices.keys()] + ['re','skip']
+    
+    input = Prompt.ask("Choose a dice",choices=choices)
+    
+    while (input == 're'):
         dices = roll(dices)
         reroll += 1
         print_dices(dices, f'Try {round} Reroll:{reroll}')
-        input_number = int(input("choose: "))
-    if input_number == -1:
+        input = Prompt.ask("Choose a dice",choices=choices)
+    if input == 'skip':
         chosen, discard, dices = {}, {}, dices
     else:
-        chosen_color = DiceColor(input_number)
+        #print(type(input_number))
+        chosen_color = DiceColor(int(input))
         chosen, discard, dices = next_round(dices, chosen_color)
     return chosen, discard, dices
 
