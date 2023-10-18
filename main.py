@@ -5,6 +5,7 @@ from rich.text import Text
 from rich.prompt import IntPrompt,Prompt
 console = Console()
 
+#TODO: 增加历史记录
 
 class DiceColor(Enum):
     White = 0
